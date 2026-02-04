@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Математическая валентинка 💘</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg1:#ffe9f0;
+      --bg2:#e7f2ff;
+      --card:#ffffffd6;
+      --text:#3e2b34;
+      --muted:#7a5965;
+      --accent:#ff5ea8;
+      --accent2:#71b7ff;
+      --shadow: 0 18px 60px rgba(18, 8, 12, .12);
+      --radius: 26px;
+    }
+    *{ box-sizing:border-box; }
+    html,body{ height:100%; }
+    body{
+      margin:0;
+      font-family:"Poppins", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(1200px 600px at 20% 20%, var(--bg1), transparent 60%),
+        radial-gradient(1200px 700px at 80% 30%, var(--bg2), transparent 55%),
+        linear-gradient(120deg, #fff6fa, #f4fbff);
+      overflow:hidden;
+    }
+
+    /* subtle grain */
+    body:before{
+      content:"";
+      position:fixed;
+      inset:0;
+      pointer-events:none;
+      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='260' height='260'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='260' height='260' filter='url(%23n)' opacity='.08'/%3E%3C/svg%3E");
+      mix-blend-mode:soft-light;
+      opacity:.65;
+    }
+
+    .hearts{
+      position:fixed;
+      inset:0;
+      pointer-events:none;
+      overflow:hidden;
+      z-index:0;
+    }
+    .heart{
+      position:absolute;
+      transform: translate(-50%, -50%);
+      animation: floatUp linear forwards;
+      opacity:.7;
+      filter: drop-shadow(0 10px 18px rgba(255, 94, 168, .18));
+      will-change: transform, opacity;
+    }
+    @keyframes floatUp{
+      0%{ transform: translate(-50%, 0) scale(.9); opacity:0; }
+      12%{ opacity:.7; }
+      100%{ transform: translate(-50%, -120vh) scale(1.25); opacity:0; }
+    }
+
+    .wrap{
+      position:relative;
+      z-index:1;
+      height:100%;
+      display:grid;
+      place-items:center;
+      padding: 18px;
+    }
+
+    .card{
+      width:min(820px, 100%);
+      background: var(--card);
+      border:1px solid #ffffff;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(14px);
+      padding: clamp(18px, 3vw, 28px);
+      display:grid;
+      gap: 16px;
+      text-align:center;
+      position:relative;
+      overflow:hidden;
+    }
+
+    .card:before{
+      content:"";
+      position:absolute;
+      inset:-60px -60px auto auto;
+      width:240px;height:240px;
+      background:
+        radial-gradient(circle at 30% 30%, rgba(255,94,168,.22), transparent 60%),
+        radial-gradient(circle at 70% 70%, rgba(113,183,255,.18), transparent 62%);
+      transform: rotate(18deg);
+      filter: blur(2px);
+      opacity:.95;
+      pointer-events:none;
+    }
+
+    h1{
+      margin:0;
+      font-weight:300;
+      letter-spacing:.2px;
+      font-size: clamp(22px, 3.2vw, 34px);
+      line-height:1.12;
+    }
+    .sub{
+      margin:0;
+      color:var(--muted);
+      font-weight:300;
+      font-size: clamp(12px, 2vw, 14px);
+    }
+
+    .factBox{
+      background: #fff;
+      border: 1px solid rgba(0,0,0,.06);
+      border-radius: 20px;
+      padding: clamp(18px, 3vw, 24px);
+      box-shadow: 0 14px 28px rgba(18,8,12,.08);
+      position:relative;
+      overflow:hidden;
+    }
+
+    .fact{
+      margin:0;
+      font-weight:300;
+      font-size: clamp(16px, 2.6vw, 22px);
+      line-height:1.55;
+      white-space:pre-line;
+      position:relative;
+      z-index:1;
+    }
+
+    .btn{
+      border:0;
+      cursor:pointer;
+      border-radius: 999px;
+      padding: 14px 16px;
+      font-family: inherit;
+      font-weight: 300;
+      font-size: 15px;
+      color:#fff;
+      background: linear-gradient(135deg, var(--accent), #ff7cc0 55%, var(--accent2));
+      box-shadow: 0 16px 34px rgba(255, 94, 168, .28);
+      transition: transform .15s ease, box-shadow .15s ease, filter .15s ease;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:10px;
+      width: min(520px, 100%);
+      margin: 0 auto;
+      user-select:none;
+    }
+    .btn:hover{ filter: brightness(1.02); box-shadow: 0 20px 40px rgba(255, 94, 168, .32); }
+    .btn:active{ transform: translateY(1px) scale(.99); }
+
+    .mini{
+      margin:0;
+      color:var(--muted);
+      font-weight:300;
+      font-size: 12px;
+    }
+
+    .pop{ animation: pop .32s ease-out; }
+    @keyframes pop{
+      0%{ transform: scale(.985); }
+      60%{ transform: scale(1.012); }
+      100%{ transform: scale(1); }
+    }
+
+    /* heart burst */
+    .burst{
+      position:fixed;
+      inset:0;
+      pointer-events:none;
+      z-index:5;
+    }
+    .burst .p{
+      position:absolute;
+      opacity:.95;
+      animation: burst 900ms ease-out forwards;
+      filter: drop-shadow(0 10px 18px rgba(18, 8, 12, .12));
+    }
+    @keyframes burst{
+      0%{ transform: translate(0,0) scale(.8); opacity:0; }
+      12%{ opacity:1; }
+      100%{ transform: translate(var(--dx), var(--dy)) scale(1.1); opacity:0; }
+    }
+  </style>
+</head>
+<body>
+  <div class="hearts" id="hearts"></div>
+
+  <main class="wrap">
+    <section class="card">
+      <h1>Получить математическую валентинку 💘</h1>
+      <p class="sub">Нажми кнопку — появится один милый факт о математике.</p>
+
+      <div class="factBox" id="factBox">
+        <p class="fact" id="fact">Нажми «Получить валентинку» 💗</p>
+      </div>
+
+      <button class="btn" id="btn" type="button">💌 Получить валентинку</button>
+      <p class="mini" id="mini">Факт появится здесь. Можно нажимать сколько угодно.</p>
+    </section>
+  </main>
+
+  <script>
+   const facts = [
+  "Математика тебе не соврёт: 1/2 пиццы — это ровно половина, а не «ну почти столько же».",
+  "Математика честная: если ответ неверный — это не потому, что ты плохой, а потому что шаг был другой.",
+  "В математике всё либо да, либо нет. Никаких «я так чувствую». И в этом её спокойствие.",
+  "Математика не обещает лишнего: если задача решаема — решение точно существует.",
+  "Математика — редкая вещь, где результат не зависит от настроения.",
+  "Если в математике получилось — значит, ты реально это понял. Не «повезло».",
+  "Математика не подводит: одинаковые условия всегда дают одинаковый результат.",
+  "В математике не бывает «почти правильно». И именно поэтому она надёжная.",
+  "Математика не играет в догадки — она работает только с фактами.",
+  "Если математика говорит «равно» — значит, правда равно.",
+  "Математика помогает договориться без слов: числа понимают в любой стране.",
+  "Математика не обижается, если ты проверяешь ответ ещё раз.",
+  "В математике можно быть уверенным: либо сошлось, либо нет — третьего не дано.",
+  "Математика не торопит: она готова подождать, пока ты всё разложишь по шагам.",
+  "Математика не кричит. Она просто спокойно доказывает.",
+  "Математика — это когда можно быть уверенным, а не надеяться.",
+  "В математике нет «на глаз». Есть точно.",
+  "Математика — это стабильность в мире, где всё меняется.",
+  "Если что-то не сходится в математике — значит, где-то есть причина.",
+  "Математика любит точность. И именно поэтому ей можно доверять."
+];
+
+
+    const openings = [
+      "💘 Твоя валентинка от математики:",
+      "💕 Математика шепчет:",
+      "💗 Валентинка:",
+      "💞 Факт-сердечко:"
+    ];
+
+    const heartsLayer = document.getElementById("hearts");
+    const factEl = document.getElementById("fact");
+    const factBox = document.getElementById("factBox");
+    const btn = document.getElementById("btn");
+    const mini = document.getElementById("mini");
+
+    function pick(arr){ return arr[Math.floor(Math.random() * arr.length)]; }
+
+    let lastIndex = -1;
+    function nextFact(){
+      if (facts.length === 1) return facts[0];
+      let i;
+      do { i = Math.floor(Math.random() * facts.length); } while (i === lastIndex);
+      lastIndex = i;
+      return facts[i];
+    }
+
+    function setFact(){
+      factEl.textContent = `${pick(openings)}\n\n${nextFact()}`;
+
+      factBox.classList.remove("pop");
+      void factBox.offsetWidth;
+      factBox.classList.add("pop");
+
+      mini.textContent = "Ещё раз? Жми снова — математика не ревнует 😄";
+      burstHearts();
+    }
+
+    // floating hearts background
+    const heartChars = ["💗","💖","💘","💕","💞","💓"];
+    function spawnHeart(){
+      const h = document.createElement("div");
+      h.className = "heart";
+      h.textContent = pick(heartChars);
+
+      const x = Math.random() * 100; // vw
+      const size = 14 + Math.random() * 18;
+      const duration = 7 + Math.random() * 7;
+
+      h.style.left = x + "vw";
+      h.style.bottom = (-10 - Math.random() * 20) + "px";
+      h.style.fontSize = size + "px";
+      h.style.animationDuration = duration + "s";
+      h.style.opacity = (0.30 + Math.random() * 0.45).toFixed(2);
+
+      heartsLayer.appendChild(h);
+      setTimeout(() => h.remove(), duration * 1000 + 200);
+    }
+    setInterval(spawnHeart, 520);
+
+    // burst hearts on click
+    function burstHearts(){
+      const burst = document.createElement("div");
+      burst.className = "burst";
+      document.body.appendChild(burst);
+
+      const rect = factBox.getBoundingClientRect();
+      const cx = rect.left + rect.width * 0.55;
+      const cy = rect.top + rect.height * 0.25;
+
+      for(let i=0;i<16;i++){
+        const p = document.createElement("div");
+        p.className = "p";
+        p.textContent = pick(heartChars);
+
+        const angle = Math.random() * Math.PI * 2;
+        const r = 40 + Math.random() * 140;
+        const dx = Math.cos(angle) * r;
+        const dy = Math.sin(angle) * r;
+
+        p.style.left = cx + "px";
+        p.style.top = cy + "px";
+        p.style.setProperty("--dx", dx + "px");
+        p.style.setProperty("--dy", dy + "px");
+        p.style.fontSize = (12 + Math.random()*14) + "px";
+        burst.appendChild(p);
+      }
+
+      setTimeout(() => burst.remove(), 950);
+    }
+
+    btn.addEventListener("click", setFact);
+    // ВАЖНО: НЕ вызываем setFact() на старте — никаких предсказаний :)
+  </script>
+</body>
+</html>
